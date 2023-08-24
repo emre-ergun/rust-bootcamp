@@ -1,12 +1,12 @@
-use auth_service;
+use engrams_auth_service;
 
 fn main() {
 
-    let creds = auth_service::Credentials {
+    let creds = engrams_auth_service::Credentials {
         username: String::from("Engram"),
         password: String::from("<PASSWORD>"),
     };
     
-    auth_service::authenticate(creds)
+    engrams_auth_service::authenticate(creds)
 
 }
