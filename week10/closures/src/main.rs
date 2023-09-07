@@ -38,9 +38,32 @@ fn main() {
     println!("{}", validate_credentials(&credential.username, &credential.password));
     println!("{}", credential.is_valid());
 
-}
+    let password_validator = get_password_validator(5, true);
+    let defauld_creds = get_default_credentials(password_validator);
 
+}
 
 fn validate_credentials(username: &str, password: &str) -> bool {
     !username.is_empty() && !password.is_empty()
+}
+
+fn get_default_credentials<T>(f: T) -> Credentials<T>
+where T: Fn(&str, &str) -> bool
+{
+    Credentials { 
+        username: "guest".to_owned(), 
+        password: "password123!".to_owned(), 
+        validator: f 
+    }
+}
+
+fn get_password_validator(min_len: usize, special_char: bool) -> Box<dyn Fn(&str, &str) -> bool> {
+    if special_char {
+        Box::new(move |_: &str, password: &str| {
+            !password.len() >= min_len &&
+            password.contains(['!', '@', '#', '$', '%', '^', '&', '*'])
+        })
+    } else {
+        Box::new(move |_: &str, password: &str| !password.len() >= min_len) 
+    }
 }
