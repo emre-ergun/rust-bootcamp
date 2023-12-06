@@ -40,5 +40,20 @@ fn main() {
     let sale_tax = book.calculate_sales_tax();
     println!("sales tax: {sale_tax}");
     book.buy();
+
+    // tuples
+    let rgb_color = (0, 255, 128);
+    let cmyk_color = (0, 255, 128, 58);
+    
+    // tuple structs
+    struct RGB(i32, i32, i32);
+    struct CMYK(i32, i32, i32, i32);
+
+    let color1 = RGB(0, 255, 128);
+    let color2 = CMYK(0, 255, 128, 58);
+
+    // unit-like struct
+    struct UnitStruct; // when you have a trait that you need to implement
+    // on something but you don't need to store any data inside of it.
 }
 
