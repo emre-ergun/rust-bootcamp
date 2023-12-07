@@ -11,10 +11,18 @@ fn main() {
 
 }
 fn get_username(id: i32) -> Option<String> {
-    let db_result = String::from("Ferris");
-    if id == 1 {
-        Some(db_result)
+    let query = format!(
+        "GET username FROM users WHERE id={id}"
+    );
+
+    let db_result = query_db(query);
+    db_result.ok()
+}
+
+fn query_db(query: String) -> Result<String, String> {
+    if query.is_empty() {
+        Err(String::from("Query string is empty!"))
     } else {
-        None
+        Ok(String::from("Ferris"))
     }
 }
