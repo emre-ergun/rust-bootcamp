@@ -63,6 +63,9 @@ impl IntoIterator for Person {
         ].into_iter()
     }
 }
+
+use std::collections::HashMap;
+
 fn main() {
     // let mut m = MyStruct {};
     // // let item: Option<String> = m.next(); // explicitly annonate the type as Option<String>.
@@ -83,5 +86,15 @@ fn main() {
 
     for item in p {
         println!("{:?}", item);
+    }
+
+
+    let mut scores = HashMap::new();
+    scores.insert("red_team".to_owned(), 2);
+    scores.insert("blue_team".to_owned(), 8);
+    scores.insert("green_team".to_owned(), 6);
+
+    for (team, score) in scores.iter() {
+        println!("{team} got: {score} points");
     }
 }
