@@ -1,3 +1,20 @@
+//inline assembly
+use std::arch::asm;
+
+fn add(x: u64, y: u64) -> u64 {
+    let result: u64;
+
+    unsafe {
+        // x86/x86-64 assembly
+        asm!(
+            "add {0}, {1}", 
+            inout(reg) x => result, 
+            in(reg) y
+        );
+    }
+
+    result
+}
 // 3. Implement an unsafe trait
 unsafe trait MyTrait {
     fn some_function(&self);
@@ -56,6 +73,10 @@ fn main() {
     unsafe {
         println!("counter:{COUNTER}");
     }
+
+    //inline assembly
+    let result = add(32, 54345);
+    println!("{result}");
 }
 
 unsafe fn my_function() {
